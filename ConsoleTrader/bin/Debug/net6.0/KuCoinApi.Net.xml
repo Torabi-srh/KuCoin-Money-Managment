@@ -1,0 +1,1461 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KuCoinApi.Net</name>
+    </assembly>
+    <members>
+        <member name="M:KuCoinApi.Net.Core.Helper.RoundDown(System.Decimal,System.Double)">
+            <summary>
+            Round a number down N decimal places
+            </summary>
+            <param name="number">Number to round down</param>
+            <param name="decimalPlaces">N decimal places</param>
+            <returns>Rounded down number</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.GetBuyPercent(System.Decimal,System.Decimal)">
+            <summary>
+            Calculate buy percent difference
+            </summary>
+            <param name="currentPrice">Current price</param>
+            <param name="lastSell">Last sell price</param>
+            <returns>Double of percent difference</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.GetSellPercent(System.Decimal,System.Decimal)">
+            <summary>
+            Calculate sell percent difference
+            </summary>
+            <param name="currentPrice">Current price</param>
+            <param name="lastBuy">Last buy price</param>
+            <returns>Double of percent difference</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.GetPercent(System.Decimal,System.Decimal)">
+            <summary>
+            Calculate percent difference from current price and last buy
+            </summary>
+            <param name="priceA">Price A</param>
+            <param name="priceB">Price B</param>
+            <returns>double of percent difference</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.ZeroSats">
+            <summary>
+            Get zero'd satoshi count
+            </summary>
+            <returns>decimal of zero sats</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.GetEnumValues``1">
+            <summary>
+            Get a collection from an enum
+            </summary>
+            <typeparam name="T">Type of enum</typeparam>
+            <returns>Collection of enum values</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.CreateDashedPair(System.String,System.String[])">
+            <summary>
+            Creates dashed pair (ie BTC-ETH)
+            </summary>
+            <param name="pair">String of pair</param>
+            <param name="markets">Array of available markets</param>
+            <returns>String of pair</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.UpperCaseFirst(System.String)">
+            <summary>
+            Set first character uppercase for a string
+            </summary>
+            <param name="toUpperCase">String to uppercase</param>
+            <returns>String with first character uppercased</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.ArrayToString(System.String[])">
+            <summary>
+            Convert an array of strings to a string
+            </summary>
+            <param name="myArray">Array of strings</param>
+            <returns>String of array values</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.ListToString(System.Collections.Generic.List{System.String})">
+            <summary>
+            Convert a list of strings to a string
+            </summary>
+            <param name="myList">List of strings</param>
+            <returns>String of list values</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.DictionaryToString(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Convert a Dictionary to a string of property names and values
+            </summary>
+            <param name="dictionary">Dictionary to convert</param>
+            <returns>String of properties and values</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.SortedDictionaryToString(System.Collections.Generic.SortedDictionary{System.String,System.Object})">
+            <summary>
+            Convert a SortedDictionary to a string of property names and values
+            </summary>
+            <param name="dictionary">Dictionary to convert</param>
+            <returns>String of properties and values</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.ObjectToString``1(``0)">
+            <summary>
+            Convert an object to a string of property names and values
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <param name="myObject">Object to convert</param>
+            <returns>String of properties and values</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.DecimalValueAtPrecision(System.Int32,System.Int32)">
+            <summary>
+            Create new decmial to the Nth power
+            </summary>
+            <param name="precision">precision of decimal</param>
+            <param name="value">Value to set, default = 1</param>
+            <returns>New decimal</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.GetEnumDescription(System.Enum)">
+            <summary>
+            Get enum description from a value
+            </summary>
+            <param name="value">Enum value</param>
+            <returns>Discription text</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.IntervalToKuCoinInterval(KuCoinApi.Net.Entities.Interval)">
+            <summary>
+            Convert interval to kucoin interval
+            </summary>
+            <param name="interval">Interval value</param>
+            <returns>Int of kucoin interval</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.IntervalToKuCoinStringInterval(KuCoinApi.Net.Entities.Interval)">
+            <summary>
+            Convert interval to kucoin string interval
+            </summary>
+            <param name="interval">Interval value</param>
+            <returns>String of kucoin interval</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.IntervalToSeconds(KuCoinApi.Net.Entities.Interval)">
+            <summary>
+            Convert interval to total seconds
+            </summary>
+            <param name="interval">Interval value</param>
+            <returns>Long of seconds</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.GetFromUnixTime(System.Int64,KuCoinApi.Net.Entities.Interval,System.Int32)">
+            <summary>
+            Get unix time off-set from current unix time
+            </summary>
+            <param name="ending">Ending time</param>
+            <param name="interval">Stick interval</param>
+            <param name="stickNumber">Number of sticks</param>
+            <returns>Long of off-set time</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Helper.DecimalToString(System.Decimal)">
+            <summary>
+            Cultural nutral decimal to string
+            </summary>
+            <param name="value">Decimal value</param>
+            <returns>String of decimal value</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Security.GetSignature(System.Net.Http.HttpMethod,System.String,System.Int64,System.String,System.Collections.Generic.SortedDictionary{System.String,System.Object})">
+            <summary>
+            Create signature for message
+            </summary>
+            <typeparam name="T">Type of data in post request</typeparam>
+            <param name="method">HttpMethod being called</param>
+            <param name="endpoint">Endpoint to access</param>
+            <param name="nonce">Current nonce</param>
+            <param name="apiSecret">ApiSecret value</param>
+            <param name="body">Request body message</param>
+            <returns>String of signature</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Core.Security.HmacSha256(System.String,System.String)">
+            <summary>
+            Get HMAC Sha256 Signature
+            </summary>
+            <param name="message">Message to sign</param>
+            <param name="secret">Api secret</param>
+            <returns>Signature for request</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Data.RepositoryBase.GetRequest``1(System.String)">
+            <summary>
+            Initiate a Get request
+            </summary>
+            <typeparam name="T">Object to return</typeparam>
+            <param name="endpoint">Endpoint of request</param>
+            <returns>Object from response</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Data.RepositoryBase.GetRequest``1(System.String,System.Int64)">
+            <summary>
+            Initiate a Get request
+            </summary>
+            <typeparam name="T">Object to return</typeparam>
+            <param name="endpoint">Endpoint of request</param>
+            <param name="timestamp">Timestamp for transaction</param>
+            <returns>Object from response</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Data.RepositoryBase.PostRequest``1(System.String,System.Int64,System.Collections.Generic.SortedDictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            Initiate a Post request
+            </summary>
+            <typeparam name="T">Object to return</typeparam>
+            <param name="endpoint">Endpoint of request</param>
+            <param name="timestamp">Timestamp for transaction</param>
+            <param name="body">Request body data</param>
+            <param name="secure">Secure endpoint?</param>
+            <returns>Object from response</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Data.RepositoryBase.DeleteRequest``1(System.String,System.Int64)">
+            <summary>
+            Initiate a Post request
+            </summary>
+            <typeparam name="T">Object to return</typeparam>
+            <param name="endpoint">Endpoint of request</param>
+            <param name="timestamp">Timestamp for transaction</param>
+            <returns>Object from response</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.Data.RepositoryBase.GetRequestHeaders(System.Net.Http.HttpMethod,System.String,System.Int64,System.Collections.Generic.SortedDictionary{System.String,System.Object})">
+            <summary>
+            Get Request headers
+            </summary>
+            <param name="httpMethod">Http Method</param>
+            <param name="endpoint">Endpoint to access</param>
+            <param name="timestamp">Timestamp for transaction</param>
+            <param name="body">Body data to be passed</param>
+            <returns>Dictionary of request headers</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetBalances(System.String,System.Nullable{KuCoinApi.Net.Entities.AccountType})">
+            <summary>
+            Get account balance
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="type">Account type</param>
+            <returns>Balance collection</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetBalance(System.String)">
+            <summary>
+            Get account balance of an account
+            </summary>
+            <param name="accountId">Account Id</param>
+            <returns>Balance object</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.CreateAccount(System.String,KuCoinApi.Net.Entities.AccountType)">
+            <summary>
+            Create an account
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="type">Type of account</param>
+            <returns>Id of new account</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetAccountHistory(System.String,System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get account history
+            </summary>
+            <param name="accountId">id of account</param>
+            <param name="startAt">Unix start time</param>
+            <param name="endAt">Unix end time</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged response of account history</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetHolds(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get holds on an account
+            </summary>
+            <param name="accountId">id of account</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged response of account holds</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.InnerTransfer(System.String,System.String,System.String,System.Decimal)">
+            <summary>
+            Transfer funds between accounts
+            </summary>
+            <param name="clientOid">Request Id</param>
+            <param name="fromId">Account Id Payer</param>
+            <param name="toId">Account Id Receiver</param>
+            <param name="amount">Amount to transfer</param>
+            <returns>Id of funds transfer order</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.PlaceOrder(System.Collections.Generic.SortedDictionary{System.String,System.Object})">
+            <summary>
+            Place an order
+            </summary>
+            <param name="body">Body of order message</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.CancelOrder(System.String)">
+            <summary>
+            Cancel an order
+            </summary>
+            <param name="orderId">Id of order to cancel</param>
+            <returns>Id of order canceled</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.CancelAllOrders">
+            <summary>
+            Cancel all open orders
+            </summary>
+            <returns>Collection of canceled order Ids</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetOrders(System.Nullable{KuCoinApi.Net.Entities.OrderStatus},System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="status">Order status</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order Type</param>
+            <param name="startAt">Start Date (Unix time)</param>
+            <param name="endAt">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetOrder(System.String)">
+            <summary>
+            Get an order
+            </summary>
+            <param name="orderId">Order id</param>
+            <returns>An Order</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetHistoricOrders(System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Side of trade</param>
+            <param name="startAt">Start Date (Unix time)</param>
+            <param name="endAt">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetFills(System.String,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order type</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.CreateDepositAddress(System.String)">
+            <summary>
+            Create Deposit address for a currency
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>New Deposit Address</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetDepositAddress(System.String)">
+            <summary>
+            Get Deposit address for a currency
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>Deposit Address</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetDepositHistory(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.DepositStatus},System.Int32,System.Int32)">
+            <summary>
+            Get deposit history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetHistoricDeposits(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.DepositStatus},System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetWithdrawalHistory(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.WithdrawalStatus},System.Int32,System.Int32)">
+            <summary>
+            Get withdrawal history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetHistoricWithdrawals(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.WithdrawalStatus},System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetWithdrawalQuota(System.String)">
+            <summary>
+            Get withdrawal details
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>WithdrawalQuota details</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.Withdrawal(System.String,System.String,System.Decimal,System.String,System.Boolean,System.String)">
+            <summary>
+            Get withdrawal details
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="address">Address to send to</param>
+            <param name="memo">Address memo</param>
+            <param name="amount">Quantity to send</param>
+            <param name="inner">Internal withdrawal?</param>
+            <param name="remark">Remarks of transaction</param>
+            <returns>WithdrawalQuota details</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.CancelWithdrawal(System.String)">
+            <summary>
+            Cancel a withdrawal
+            </summary>
+            <param name="withdrawalId">Withdrawal Id to cancel</param>
+            <returns>Withdrawal Id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.ValidateExchangeConfigured">
+            <summary>
+            Check if the Exchange Repository is ready for trading
+            </summary>
+            <returns>Boolean of validation</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetTradingPairDetails">
+            <summary>
+            Get available trading pairs
+            </summary>
+            <returns>Collection of Trading Pair Details</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetTicker(System.String)">
+            <summary>
+            Get Ticker for a trading pair
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>Ticker of pair</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KuCoinApi.Net.IKuCoinDotNet.GetPartOrderBook(System.String)" -->
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetFullOrderBook(System.String)">
+            <summary>
+            Get order book for a pair, full depth
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>OrderBook data</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetEntireOrderBook(System.String)">
+            <summary>
+            Returns entire order book
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>Detailed OrderBook data</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetTradeHistory(System.String)">
+            <summary>
+            Get latest trades
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>Collection of TradeHistory</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetCandlestick(System.String,System.Int64,System.Int64,KuCoinApi.Net.Entities.Interval)">
+            <summary>
+            Get candlesticks
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="startAt">Starting date</param>
+            <param name="endAt">Ending date</param>
+            <param name="interval">Candlestick interval</param>
+            <returns>Collection of candlesticks</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetAllTickers">
+            <summary>
+            Get All tickers for exchange
+            </summary>
+            <returns>Collection of TradingPairStats objects</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.Get24HrStats(System.String)">
+            <summary>
+            Get 24 hour stats for a trading pair
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>TradingPairStats object</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetMarkets">
+            <summary>
+            Get the transaction currency for the entire trading market.
+            </summary>
+            <returns>Collection of currencies</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetCurrencies">
+            <summary>
+            Get known currencies
+            </summary>
+            <returns>Collection of Currency objects</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetCurrency(System.String)">
+            <summary>
+            Get currency detail
+            </summary>
+            <param name="symbol">Currency symbol</param>
+            <returns>CurrencyDetail objects</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetFiatPrice(System.String,System.String)">
+            <summary>
+            Get fiat price for currency
+            </summary>
+            <param name="baseCurrency">Base currency (USD, EUR) Default USD</param>
+            <param name="currencies">Comma separated list of currencies to limit out put (BTC, ETH) default all</param>
+            <returns>Currencies and fiat prices</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetServerTime">
+            <summary>
+            Get server time from KuCoin
+            </summary>
+            <returns>Unix server time</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetPublicChannels">
+            <summary>
+            Get websocket channel list (public channels)
+            </summary>
+            <returns>Collection of servers</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNet.GetPrivateChannels">
+            <summary>
+            Get websocket channel list (private channels)
+            </summary>
+            <returns>Collection of servers</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetBalances(KuCoinApi.Net.IKuCoinDotNet)">
+            <summary>
+            Get account balance
+            </summary>
+            <returns>Balance collection</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetBalances(KuCoinApi.Net.IKuCoinDotNet,System.Boolean)">
+            <summary>
+            Get all account balances
+            </summary>
+            <param name="hideZeroBalance">Hide zero balance coins</param>
+            <returns>Balance collection</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetBalances(KuCoinApi.Net.IKuCoinDotNet,System.String)">
+            <summary>
+            Get account balance
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>Balance collection</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetBalances(KuCoinApi.Net.IKuCoinDotNet,KuCoinApi.Net.Entities.AccountType)">
+            <summary>
+            Get account balance
+            </summary>
+            <param name="type">Account type</param>
+            <returns>Balance collection</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetAccountHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            Get account history
+            </summary>
+            <param name="accountId">id of account</param>
+            <param name="startAt">Start time</param>
+            <param name="endAt">End time</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged response of account history</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.InnerTransfer(KuCoinApi.Net.IKuCoinDotNet,System.String,System.String,System.Decimal)">
+            <summary>
+            Transfer funds between accounts
+            </summary>
+            <param name="fromId">Account Id Payer</param>
+            <param name="toId">Account Id Receiver</param>
+            <param name="amount">Amount to transfer</param>
+            <returns>Id of funds transfer order</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.PlaceLimitOrder(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,System.Decimal,System.Decimal)">
+            <summary>
+            Place a limit order
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Side of trade</param>
+            <param name="price">Price of trade</param>
+            <param name="quantity">Quantity to trade</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.PlaceLimitOrder(KuCoinApi.Net.IKuCoinDotNet,KuCoinApi.Net.Entities.LimitOrderParams)">
+            <summary>
+            Place a limit order
+            </summary>
+            <param name="parms">Limit Order Parameters</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.PlaceMarketOrder(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,System.Decimal)">
+            <summary>
+            Place a market order
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Side of trade</param>
+            <param name="quantity">Quantity to trade</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.PlaceMarketOrder(KuCoinApi.Net.IKuCoinDotNet,KuCoinApi.Net.Entities.MarketOrderParams)">
+            <summary>
+            Place a market order
+            </summary>
+            <param name="parms">Market Order Parameters</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.PlaceStopOrder(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,System.Decimal,System.Decimal,System.Decimal,KuCoinApi.Net.Entities.StopType)">
+            <summary>
+            Place a stop order
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Side of trade</param>
+            <param name="price">Price of trade</param>
+            <param name="quantity">Quantity to trade</param>
+            <param name="stopPrice">Stop price of trade</param>
+            <param name="stopType">Stop order type</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.PlaceStopOrder(KuCoinApi.Net.IKuCoinDotNet,KuCoinApi.Net.Entities.StopLimitOrderParams)">
+            <summary>
+            Place a stop order
+            </summary>
+            <param name="parms">Stop Limit Order Parameters</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.OrderStatus,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="status">Order status</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,KuCoinApi.Net.Entities.OrderStatus,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="status">Order status</param>
+            <param name="side">Trade side</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{KuCoinApi.Net.Entities.OrderStatus},System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="status">Order status</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order Type</param>
+            <param name="startDate">Start Date</param>
+            <param name="endDate">End Date</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{KuCoinApi.Net.Entities.OrderStatus},System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="status">Order status</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order Type</param>
+            <param name="startAt">Start Date (Unix time)</param>
+            <param name="endAt">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOpenOrders(KuCoinApi.Net.IKuCoinDotNet,System.Int32,System.Int32)">
+            <summary>
+            Get all open orders
+            </summary>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOpenOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get all open orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOpenOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,System.Int32,System.Int32)">
+            <summary>
+            Get all open orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOpenOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get all open orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order Type</param>
+            <param name="startDate">Start Date (Unix time)</param>
+            <param name="endDate">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetOpenOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get all open orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order Type</param>
+            <param name="startAt">Start Date (Unix time)</param>
+            <param name="endAt">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricOrders(KuCoinApi.Net.IKuCoinDotNet,System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Side,System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricOrders(KuCoinApi.Net.IKuCoinDotNet,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="startDate">Start Date</param>
+            <param name="endDate">End Date</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricOrders(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="startDate">Start Date</param>
+            <param name="endDate">End Date</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFills(KuCoinApi.Net.IKuCoinDotNet,System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFillsForOrder(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFillsForPair(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFills(KuCoinApi.Net.IKuCoinDotNet,System.String,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order type</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFills(KuCoinApi.Net.IKuCoinDotNet,System.String,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order type</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFills(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order type</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFills(KuCoinApi.Net.IKuCoinDotNet,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetDepositHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get deposit history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetDepositHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.DepositStatus,System.Int32,System.Int32)">
+            <summary>
+            Get deposit history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetDepositHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{KuCoinApi.Net.Entities.DepositStatus},System.Int32,System.Int32)">
+            <summary>
+            Get deposit history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricDeposits(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricDeposits(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.DepositStatus,System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricDeposits(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{KuCoinApi.Net.Entities.DepositStatus},System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetWithdrawalHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get withdrawal history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetWithdrawalHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.DepositStatus,System.Int32,System.Int32)">
+            <summary>
+            Get withdrawal history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetWithdrawalHistory(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{KuCoinApi.Net.Entities.WithdrawalStatus},System.Int32,System.Int32)">
+            <summary>
+            Get withdrawal history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricWithdrawals(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get historic withdrawal history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricWithdrawals(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.DepositStatus,System.Int32,System.Int32)">
+            <summary>
+            Get historic withdrawal history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetHistoricWithdrawals(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{KuCoinApi.Net.Entities.WithdrawalStatus},System.Int32,System.Int32)">
+            <summary>
+            Get historic withdrawal history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startDate">Start date</param>
+            <param name="endDate">End date</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetTradingPairs(KuCoinApi.Net.IKuCoinDotNet,System.Boolean)">
+            <summary>
+            Get current trading pairs on the exchange
+            </summary>
+            <param name="trading">Currently trading</param>
+            <returns>Collection of trading pairs</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetCandlestick(KuCoinApi.Net.IKuCoinDotNet,System.String,KuCoinApi.Net.Entities.Interval,System.Int32)">
+            <summary>
+            Get candlesticks
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="interval">Candlestick interval</param>
+            <param name="stickCount">Number of sticks to return</param>
+            <returns>Collection of candlesticks</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetCandlestick(KuCoinApi.Net.IKuCoinDotNet,System.String,System.Int64,KuCoinApi.Net.Entities.Interval,System.Int32)">
+            <summary>
+            Get candlesticks
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="endAt">Ending date</param>
+            <param name="interval">Candlestick interval</param>
+            <param name="stickCount">Number of sticks to return</param>
+            <returns>Collection of candlesticks</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetCandlestick(KuCoinApi.Net.IKuCoinDotNet,System.String,System.DateTime,KuCoinApi.Net.Entities.Interval,System.Int32)">
+            <summary>
+            Get candlesticks
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="endDate">Ending date</param>
+            <param name="interval">Candlestick interval</param>
+            <param name="stickCount">Number of sticks to return</param>
+            <returns>Collection of candlesticks</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetCandlestick(KuCoinApi.Net.IKuCoinDotNet,System.String,System.DateTime,System.DateTime,KuCoinApi.Net.Entities.Interval)">
+            <summary>
+            Get candlesticks
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="startDate">Starting date</param>
+            <param name="endDate">Ending date</param>
+            <param name="interval">Candlestick interval</param>
+            <returns>Collection of candlesticks</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.IKuCoinDotNetExtension.GetFiatPrice(KuCoinApi.Net.IKuCoinDotNet)">
+            <summary>
+            Get fiat price for currency
+            </summary>
+            <returns>Currencies and fiat prices</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.#ctor(System.Boolean)">
+            <summary>
+            Constructor for non-signed endpoints
+            </summary>
+            <param name="sandbox">Use sandbox? (default = false)</param>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Constructor for signed endpoints
+            </summary>
+            <param name="apiKey">Api key</param>
+            <param name="apiSecret">Api secret</param>
+            <param name="apiPassword">Api password</param>
+            <param name="sandbox">Use sandbox? (default = false)</param>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.#ctor(System.String,System.Boolean)">
+            <summary>
+            Constructor for signed endpoints
+            </summary>
+            <param name="configPath">String of path to configuration file</param>
+            <param name="sandbox">Use sandbox? (default = false)</param>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.#ctor(KuCoinApi.Net.Entities.ApiInformation,System.Boolean)">
+            <summary>
+            Constructor for signed endpoints
+            </summary>
+            <param name="apiInformation">Api Key information</param>
+            <param name="sandbox">Use sandbox? (default = false)</param>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.LoadRepository(System.String,System.String,System.String)">
+            <summary>
+            Load repository
+            </summary>
+            <param name="key">Api key value (default = "")</param>
+            <param name="secret">Api secret value (default = "")</param>
+            <param name="password">Api password value (default = "")</param>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetBalances(System.String,System.Nullable{KuCoinApi.Net.Entities.AccountType})">
+            <summary>
+            Get account balance
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="type">Account type</param>
+            <returns>Balance collection</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetBalance(System.String)">
+            <summary>
+            Get account balance of an account
+            </summary>
+            <param name="accountId">Account Id</param>
+            <returns>Balance object</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.CreateAccount(System.String,KuCoinApi.Net.Entities.AccountType)">
+            <summary>
+            Create an account
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="type">Type of account</param>
+            <returns>Id of new account</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetAccountHistory(System.String,System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get account history
+            </summary>
+            <param name="accountId">id of account</param>
+            <param name="startAt">Unix start time</param>
+            <param name="endAt">Unix end time</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged response of account history</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetHolds(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get holds on an account
+            </summary>
+            <param name="accountId">id of account</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged response of account holds</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.InnerTransfer(System.String,System.String,System.String,System.Decimal)">
+            <summary>
+            Transfer funds between accounts
+            </summary>
+            <param name="clientOid">Request Id</param>
+            <param name="fromId">Account Id Payer</param>
+            <param name="toId">Account Id Receiver</param>
+            <param name="amount">Amount to transfer</param>
+            <returns>Id of funds transfer order</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.PlaceOrder(System.Collections.Generic.SortedDictionary{System.String,System.Object})">
+            <summary>
+            Place an order
+            </summary>
+            <param name="body">Body of order message</param>
+            <returns>String of order id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.CancelOrder(System.String)">
+            <summary>
+            Cancel an order
+            </summary>
+            <param name="orderId">Id of order to cancel</param>
+            <returns>Id of order canceled</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.CancelAllOrders">
+            <summary>
+            Cancel all open orders
+            </summary>
+            <returns>Collection of canceled order Ids</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetOrders(System.Nullable{KuCoinApi.Net.Entities.OrderStatus},System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get all orders
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="status">Order status</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order Type</param>
+            <param name="startAt">Start Date (Unix time)</param>
+            <param name="endAt">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetOrder(System.String)">
+            <summary>
+            Get an order
+            </summary>
+            <param name="orderId">Order id</param>
+            <returns>An Order</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetHistoricOrders(System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get a list of KuCoin V1 historical orders.
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="side">Side of trade</param>
+            <param name="startAt">Start Date (Unix time)</param>
+            <param name="endAt">End Date (Unix time)</param>
+            <param name="page">page number</param>
+            <param name="pageSize">page size</param>
+            <returns>Paged list of Orders</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetFills(System.String,System.String,System.Nullable{KuCoinApi.Net.Entities.Side},System.Nullable{KuCoinApi.Net.Entities.OrderType},System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Get Fills
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="pair">Trading pair</param>
+            <param name="side">Trade side</param>
+            <param name="type">Order type</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Page collection of Fills</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.CreateDepositAddress(System.String)">
+            <summary>
+            Create Deposit address for a currency
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>New Deposit Address</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetDepositAddress(System.String)">
+            <summary>
+            Get Deposit address for a currency
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>Deposit Address</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetDepositHistory(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.DepositStatus},System.Int32,System.Int32)">
+            <summary>
+            Get deposit history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetHistoricDeposits(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.DepositStatus},System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Deposit status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of Deposits</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetWithdrawalHistory(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.WithdrawalStatus},System.Int32,System.Int32)">
+            <summary>
+            Get withdrawal history
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetHistoricWithdrawals(System.String,System.Int64,System.Int64,System.Nullable{KuCoinApi.Net.Entities.WithdrawalStatus},System.Int32,System.Int32)">
+            <summary>
+            Get historic deposit history (KuCoin v1)
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="startAt">Start date</param>
+            <param name="endAt">End date</param>
+            <param name="status">Withdrawal status</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Paged collection of withdrawals</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetWithdrawalQuota(System.String)">
+            <summary>
+            Get withdrawal details
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <returns>WithdrawalQuota details</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.Withdrawal(System.String,System.String,System.Decimal,System.String,System.Boolean,System.String)">
+            <summary>
+            Get withdrawal details
+            </summary>
+            <param name="symbol">Symbol of currency</param>
+            <param name="address">Address to send to</param>
+            <param name="memo">Address memo</param>
+            <param name="amount">Quantity to send</param>
+            <param name="inner">Internal withdrawal?</param>
+            <param name="remark">Remarks of transaction</param>
+            <returns>WithdrawalQuota details</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.CancelWithdrawal(System.String)">
+            <summary>
+            Cancel a withdrawal
+            </summary>
+            <param name="withdrawalId">Withdrawal Id to cancel</param>
+            <returns>Withdrawal Id</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetTradingPairDetails">
+            <summary>
+            Get available trading pairs
+            </summary>
+            <returns>Collection of Trading Pair Details</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetTicker(System.String)">
+            <summary>
+            Get Ticker for a trading pair
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>Ticker of pair</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KuCoinApi.Net.KuCoinDotNet.GetPartOrderBook(System.String)" -->
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetFullOrderBook(System.String)">
+            <summary>
+            Get order book for a pair, full depth
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>OrderBook data</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetEntireOrderBook(System.String)">
+            <summary>
+            Returns entire order book
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>Detailed OrderBook data</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetTradeHistory(System.String)">
+            <summary>
+            Get latest trades
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>Collection of TradeHistory</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetCandlestick(System.String,System.Int64,System.Int64,KuCoinApi.Net.Entities.Interval)">
+            <summary>
+            Get candlesticks
+            </summary>
+            <param name="pair">Trading pair</param>
+            <param name="startAt">Starting date</param>
+            <param name="endAt">Ending date</param>
+            <param name="interval">Candlestick interval</param>
+            <returns>Collection of candlesticks</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetAllTickers">
+            <summary>
+            Get All tickers for exchange
+            </summary>
+            <returns>Collection of TradingPairStats objects</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.Get24HrStats(System.String)">
+            <summary>
+            Get 24 hour stats for a trading pair
+            </summary>
+            <param name="pair">Trading pair</param>
+            <returns>TradingPairStats object</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetMarkets">
+            <summary>
+            Get the transaction currency for the entire trading market.
+            </summary>
+            <returns>Collection of currencies</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetCurrencies">
+            <summary>
+            Get known currencies
+            </summary>
+            <returns>Collection of Currency objects</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetCurrency(System.String)">
+            <summary>
+            Get currency detail
+            </summary>
+            <param name="symbol">Currency symbol</param>
+            <returns>CurrencyDetail objects</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetFiatPrice(System.String,System.String)">
+            <summary>
+            Get fiat price for currency
+            </summary>
+            <param name="baseCurrency">Base currency (USD, EUR) Default USD</param>
+            <param name="currencies">Comma separated list of currencies to limit out put (BTC, ETH) default all</param>
+            <returns>Currencies and fiat prices</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetServerTime">
+            <summary>
+            Get server time from KuCoin
+            </summary>
+            <returns>Unix server time</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.ValidateExchangeConfigured">
+            <summary>
+            Check if the Exchange Repository is ready for trading
+            </summary>
+            <returns>Boolean of validation</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetPublicChannels">
+            <summary>
+            Get websocket channel list (public channels)
+            </summary>
+            <returns>Collection of servers</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetPrivateChannels">
+            <summary>
+            Get websocket channel list (private channels)
+            </summary>
+            <returns>Collection of servers</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.TimestampCompare">
+            <summary>
+            Compare exchange and system unix timestamps
+            </summary>
+            <returns>True if difference less than 1000 MS, otherwise false</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.GetTimestamp">
+            <summary>
+            Get unix timestamp
+            </summary>
+            <returns>Long of timestamp</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.Delete``1(System.String)">
+            <summary>
+            Delete request pre-processor
+            </summary>
+            <typeparam name="T">Type to return</typeparam>
+            <param name="endpoint">Endpoint string</param>
+            <returns>Async task of response</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.Get``1(System.String,System.Boolean)">
+            <summary>
+            Get request pre-processor
+            </summary>
+            <typeparam name="T">Type to return</typeparam>
+            <param name="endpoint">Endpoint string</param>
+            <param name="secure">Secure call?</param>
+            <returns>Async task of response</returns>
+        </member>
+        <member name="M:KuCoinApi.Net.KuCoinDotNet.Post``1(System.String,System.Collections.Generic.SortedDictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            Post request pre-processor
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="endpoint">Endpoint string</param>
+            <param name="body">Request body data</param>
+            <param name="secure">Secure endpoint? default = true</param>
+            <returns>Async task of response</returns>
+        </member>
+    </members>
+</doc>
