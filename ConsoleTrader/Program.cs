@@ -23,7 +23,6 @@ namespace ConsoleTrader
     internal class Program
     {
         static Trader currentTrader = new Trader();
-        static KuCoinDotNet kucoinClient = new KuCoinDotNet();
         static KucoinClient kucoinClient2 = new KucoinClient();
         static Models.Trade? trade = new Models.Trade();
         static decimal currentBalance = 0;
@@ -61,7 +60,6 @@ namespace ConsoleTrader
                     BaseAddress = (isSandbox) ? KucoinApiAddresses.TestNet.SpotAddress : KucoinApiAddresses.Default.SpotAddress
                 }
             });
-            kucoinClient = new KuCoinDotNet(trade.apiKey, trade.apiSecret, trade.apiPassphrase, isSandbox);
             updateClient().Wait();
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
@@ -79,11 +77,12 @@ namespace ConsoleTrader
             Console.WriteLine("");
 
             var t = await kucoinClient2.SpotApi.CommonSpotClient.GetOrderAsync(orderData.Data.Id);
-            var _data = await kucoinClient.GetTicker(currentTrader.symbol);
-            avgList.Add(_data.Price);
+            var _data = await kucoinClient2.SpotApi.CommonSpotClient.GetTickerAsync(currentTrader.symbol);
+            var price = _data.Data.LastPrice ?? 0;
+            avgList.Add(price);
 
-            decimal rebuyPrice = Math.Abs(_data.Price - (Calculate.down * _data.Price / 100));
-            decimal sellPrice = _data.Price + (Calculate.up * _data.Price / 100);
+            decimal rebuyPrice = Math.Abs(price  - (Calculate.down * price / 100));
+            decimal sellPrice = price + (Calculate.up * price / 100);
             rebuyPrice = Math.Round(rebuyPrice, 4);
             sellPrice = Math.Round(sellPrice, 4);
 
@@ -106,6 +105,7 @@ namespace ConsoleTrader
                 currentTrader.avgPrice = 0;
                 foreach (var bought in avgList)
                 {
+                    if (bought == 0) continue;
                     currentTrader.avgPrice += bought;
                 }
                 currentTrader.avgPrice /= avgList.Count;
@@ -148,8 +148,8 @@ namespace ConsoleTrader
                     {
                         var ordersCancelAll = await kucoinClient2.SpotApi.Trading.CancelAllOrdersAsync(currentTrader.symbol);
 
-                        var _assets = await kucoinClient.GetBalances();
-                        var tx = _assets.Where(x => x.Symbol == currentTrader.symbol.Split("-")[0]).FirstOrDefault();
+                        var _assets = await kucoinClient2.SpotApi.Account.GetAccountsAsync();
+                        var tx = _assets.Data.Where(x => x.Asset == currentTrader.symbol.Split("-")[0]).FirstOrDefault();
                         if (tx?.Available != null)
                         {
                             if (tx.Available > 0.00001m)
@@ -197,12 +197,13 @@ namespace ConsoleTrader
             decimal quantity = Math.Round(currentTrader.quantity, 4);
             Console.WriteLine("Trade List Report: ");
             Console.WriteLine($"Trade Start: Buy Type Market Quantity: {quantity} ");
+             
+            var _data = await kucoinClient2.SpotApi.CommonSpotClient.GetTickerAsync(currentTrader.symbol);
+            var price = _data.Data.LastPrice ?? 0;
+            avgListTmp.Add(price);
 
-            var _data = await kucoinClient.GetTicker(currentTrader.symbol);
-            avgListTmp.Add(_data.Price);
-
-            decimal rebuyPrice = Math.Abs(_data.Price - (Calculate.down * _data.Price / 100));
-            decimal sellPrice = _data.Price + (Calculate.up * _data.Price / 100);
+            decimal rebuyPrice = Math.Abs(price - (Calculate.down * price / 100));
+            decimal sellPrice = price + (Calculate.up * price / 100);
 
             rebuyPrice = Math.Round(rebuyPrice, 10);
             sellPrice = Math.Round(sellPrice, 10);
@@ -251,25 +252,25 @@ namespace ConsoleTrader
         {
             if (trade is null) return;
             Console.Clear();
-            var _assets = await kucoinClient.GetBalances();
+            var _assets = await kucoinClient2.SpotApi.Account.GetAccountsAsync();
             int ci = 1;
-            foreach (var item in _assets)
+            foreach (var item in _assets.Data)
             {
-                Console.WriteLine($"{ci}. Asset: {item.Symbol} Total: {item.Total} Balance: {item.Available}");
+                Console.WriteLine($"{ci}. Asset: {item.Asset} Total: {item.Total} Balance: {item.Available}");
                 ci++;
             }
             Console.WriteLine($"Select Asset to continue: ");
             int key = int.TryParse(Console.ReadLine(), out key) ? key : -1;
-            while (key == -1 || key > _assets.Count())
+            while (key == -1 || key > _assets.Data.Count())
             {
                 Console.WriteLine($"Wrong number");
                 Console.WriteLine($"Again: ");
                 key = int.TryParse(Console.ReadLine(), out key) ? key : -1;
             }
-            var _selectedAssets = _assets[key - 1];
+            var _selectedAssets = _assets.Data.ToArray()[key - 1];
             currentBalance = (_selectedAssets.Available * trade.balance) / 100;
-            var _tmp = await kucoinClient.GetTradingPairs();
-            var _tickers = _tmp.Where(x => x.EndsWith(_selectedAssets.Symbol)).ToList();
+            var _tmp = await kucoinClient2.SpotApi.CommonSpotClient.GetSymbolsAsync();
+            var _tickers = _tmp.Data.Where(x => x.Name.EndsWith(_selectedAssets.Asset)).ToArray();
             ci = 1;
             foreach (var i in _tickers)
             {
@@ -285,7 +286,7 @@ namespace ConsoleTrader
                 Console.WriteLine($"Again: ");
                 key = int.TryParse(Console.ReadLine(), out key) ? key : -1;
             }
-            var _selectedTickers = (key == 0) ? trade.pair : _tickers[key - 1];
+            var _selectedTickers = (key == 0) ? trade.pair : _tickers[key - 1].Name;
 
             Pair = _selectedTickers;
             trade.interval = trade.interval * 1000;
@@ -300,7 +301,7 @@ namespace ConsoleTrader
             currentTrader.quantity = currentBalance / trade.divides;
             currentTrader.divides = trade.divides;
 
-            prompt += $"Trade With {_selectedAssets.Symbol} \n" +
+            prompt += $"Trade With {_selectedAssets.Asset} \n" +
                       $"Buy {_selectedTickers} \n" +
                       $"Total used balance {_selectedAssets.Available} (unit)\n" +
                       $"Divided by {trade.divides} parts\n" +
