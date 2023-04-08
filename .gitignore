@@ -9,10 +9,13 @@
 **/*.userosscache
 **/*.sln.docstates
 .vs
+.vs/
 ConsoleTrader/bin
 ConsoleTrader/obj
 Trader/bin
 Trader/obj
+bin/
+obj/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
