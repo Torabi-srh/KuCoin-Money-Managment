@@ -169,8 +169,7 @@ namespace ConsoleTrader
                             await LimitTrader();
                         }
                         return;
-                    }
-
+                    } 
                     foreach (var item in placedOrdersList)
                     {
                         if (ordersList.Data.Items.Where(x => x.IsActive == true && x.Id == item.Key).ToArray().Count() == 0)
@@ -180,6 +179,8 @@ namespace ConsoleTrader
                             orderDataLimiteSell = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
                                                     Kucoin.Net.Enums.OrderSide.Sell, Kucoin.Net.Enums.NewOrderType.Limit,
                                                     quantity: iQuantity, price: item.Value);
+                            placedOrdersList.Remove(item.Key);
+                            Console.WriteLine($"Sell order updated with price {item.Value} and quantity of total {iQuantity}");
                             break;
                         }
                     }

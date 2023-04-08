@@ -5,8 +5,6 @@ VisualStudioVersion = 17.5.33209.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kucoin.Net", "C:\Users\Soroush\source\repos\Torabi-srh\Kucoin.Net\Kucoin.Net\Kucoin.Net.csproj", "{00B7076D-01C5-4843-A713-F9DEA3476E1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{A5603662-3CAC-4986-8991-C66C4C40C879}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trader", "Trader\Trader.csproj", "{5639E26D-638E-4F12-A8A6-E86E1F45D329}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTrader", "ConsoleTrader\ConsoleTrader.csproj", "{ABDE56F1-5F1E-4E36-ADD7-123131F42BB2}"
@@ -23,10 +21,6 @@ Global
 		{00B7076D-01C5-4843-A713-F9DEA3476E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00B7076D-01C5-4843-A713-F9DEA3476E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00B7076D-01C5-4843-A713-F9DEA3476E1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5603662-3CAC-4986-8991-C66C4C40C879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5603662-3CAC-4986-8991-C66C4C40C879}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5603662-3CAC-4986-8991-C66C4C40C879}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5603662-3CAC-4986-8991-C66C4C40C879}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5639E26D-638E-4F12-A8A6-E86E1F45D329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5639E26D-638E-4F12-A8A6-E86E1F45D329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5639E26D-638E-4F12-A8A6-E86E1F45D329}.Release|Any CPU.ActiveCfg = Release|Any CPU
