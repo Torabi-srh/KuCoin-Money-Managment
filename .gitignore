@@ -14,6 +14,10 @@ ConsoleTrader/bin
 ConsoleTrader/obj
 Trader/bin
 Trader/obj
+ConsoleTrader/bin/
+ConsoleTrader/obj/
+Trader/bin/
+Trader/obj/
 bin/
 obj/
 # User-specific files (MonoDevelop/Xamarin Studio)
