@@ -8,14 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Scripts\KuCoinApi.Net-master\KuCoinApi.Net\KuCoinApi.Net\KuCoinApi.Net.csproj" />
-    <ProjectReference Include="C:\Users\Soroush\source\repos\Torabi-srh\Kucoin.Net\Kucoin.Net\Kucoin.Net.csproj" />
+    <None Remove="settings.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="settings.json">
+    <Content Include="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Soroush\source\repos\Torabi-srh\Kucoin.Net\Kucoin.Net\Kucoin.Net.csproj" />
   </ItemGroup>
 
 </Project>

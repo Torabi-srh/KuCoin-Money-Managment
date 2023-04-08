@@ -1,29 +1,15 @@
 ﻿using ConsoleTrader.Models;
-using KuCoinApi.Net;
-using KuCoinApi.Net.Entities;
-using Microsoft.VisualBasic;
-using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Objects;
 using Kucoin.Net.Clients;
 using Kucoin.Net.Objects;
-using Kucoin.Net.Objects.Models.Spot;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Linq;
-using System.Xml;
-using Order = KuCoinApi.Net.Entities.Order;
-//limite order faqat besazim
 namespace ConsoleTrader
 {
     internal class Program
     {
         static Trader currentTrader = new Trader();
-        static KucoinClient kucoinClient2 = new KucoinClient();
+        static KucoinClient kucoinClient = new KucoinClient();
         static Models.Trade? trade = new Models.Trade();
         static decimal currentBalance = 0;
         static Calclist Calculate = new Calclist();
@@ -43,7 +29,7 @@ namespace ConsoleTrader
                 tradeCalc.Enqueue(item);
             }
             isSandbox = trade.sandbox == 0 ? false : true;
-            kucoinClient2 = new KucoinClient(new KucoinClientOptions()
+            kucoinClient = new KucoinClient(new KucoinClientOptions()
             {
                 ApiCredentials = new KucoinApiCredentials(trade.apiKey, trade.apiSecret, trade.apiPassphrase),
                 LogLevel = LogLevel.Trace,
@@ -71,13 +57,13 @@ namespace ConsoleTrader
             Queue<Calclist> tradeCalcs = tradeCalc;
             Calculate = tradeCalcs.Dequeue();
             decimal quantity = Math.Round(currentTrader.quantity, 4);
-            var orderData = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
+            var orderData = await kucoinClient.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
                 Kucoin.Net.Enums.OrderSide.Buy, Kucoin.Net.Enums.NewOrderType.Market, quoteQuantity: quantity);
             Console.WriteLine($"Trade Market: Buy Quantity: {quantity}");
             Console.WriteLine("");
 
-            var t = await kucoinClient2.SpotApi.CommonSpotClient.GetOrderAsync(orderData.Data.Id);
-            var _data = await kucoinClient2.SpotApi.CommonSpotClient.GetTickerAsync(currentTrader.symbol);
+            var t = await kucoinClient.SpotApi.CommonSpotClient.GetOrderAsync(orderData.Data.Id);
+            var _data = await kucoinClient.SpotApi.CommonSpotClient.GetTickerAsync(currentTrader.symbol);
             var price = _data.Data.LastPrice ?? 0;
             avgList.Add(price);
 
@@ -86,10 +72,10 @@ namespace ConsoleTrader
             rebuyPrice = Math.Round(rebuyPrice, 4);
             sellPrice = Math.Round(sellPrice, 4);
 
-            var orderDataLimiteSell = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
+            var orderDataLimiteSell = await kucoinClient.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
                       Kucoin.Net.Enums.OrderSide.Sell, Kucoin.Net.Enums.NewOrderType.Limit,
                       quantity: t.Data.QuantityFilled ?? 0, price: sellPrice);
-            var orderDataLimiteBuy = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol, Kucoin.Net.Enums.OrderSide.Buy,
+            var orderDataLimiteBuy = await kucoinClient.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol, Kucoin.Net.Enums.OrderSide.Buy,
                                            Kucoin.Net.Enums.NewOrderType.Limit, quantity: t.Data.QuantityFilled ?? 0, price: rebuyPrice);
             Console.WriteLine($"Trade 1: Sell Type Limit Quantity: {t.Data.QuantityFilled} Price {sellPrice}");
             Console.WriteLine($"---------------------------------------");
@@ -117,7 +103,7 @@ namespace ConsoleTrader
                 sellPrice = Math.Round(sellPrice, 4);
 
                 placedOrdersList.Add(orderDataLimiteBuy.Data.Id, sellPrice);
-                orderDataLimiteBuy = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol, Kucoin.Net.Enums.OrderSide.Buy,
+                orderDataLimiteBuy = await kucoinClient.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol, Kucoin.Net.Enums.OrderSide.Buy,
                                              Kucoin.Net.Enums.NewOrderType.Limit, quantity: t.Data.QuantityFilled ?? 0, price: rebuyPrice);
 
                 ind++;
@@ -141,21 +127,21 @@ namespace ConsoleTrader
             }
             while (true)
             {
-                var ordersList = await kucoinClient2.SpotApi.Trading.GetOrdersAsync(currentTrader.symbol, Kucoin.Net.Enums.OrderSide.Sell, status: Kucoin.Net.Enums.OrderStatus.Done);
+                var ordersList = await kucoinClient.SpotApi.Trading.GetOrdersAsync(currentTrader.symbol, Kucoin.Net.Enums.OrderSide.Sell, status: Kucoin.Net.Enums.OrderStatus.Done);
                 if (ordersList.Success)
                 {
                     if (ordersList.Data.Items.Where(x => x.IsActive == true).ToList().Count == 0)
                     {
-                        var ordersCancelAll = await kucoinClient2.SpotApi.Trading.CancelAllOrdersAsync(currentTrader.symbol);
+                        var ordersCancelAll = await kucoinClient.SpotApi.Trading.CancelAllOrdersAsync(currentTrader.symbol);
 
-                        var _assets = await kucoinClient2.SpotApi.Account.GetAccountsAsync();
+                        var _assets = await kucoinClient.SpotApi.Account.GetAccountsAsync();
                         var tx = _assets.Data.Where(x => x.Asset == currentTrader.symbol.Split("-")[0]).FirstOrDefault();
                         if (tx?.Available != null)
                         {
                             if (tx.Available > 0.00001m)
                             {
                                 var qtn = sellPrice = Math.Round(tx.Available, 4);
-                                orderData = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
+                                orderData = await kucoinClient.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
                                                 Kucoin.Net.Enums.OrderSide.Sell, Kucoin.Net.Enums.NewOrderType.Market, quoteQuantity: qtn);
                                 if (orderData?.Data == null)
                                 {
@@ -174,9 +160,9 @@ namespace ConsoleTrader
                     {
                         if (ordersList.Data.Items.Where(x => x.IsActive == true && x.Id == item.Key).ToArray().Count() == 0)
                         {
-                            _ = await kucoinClient2.SpotApi.Trading.CancelOrderAsync(orderDataLimiteSell.Data.Id);
+                            _ = await kucoinClient.SpotApi.Trading.CancelOrderAsync(orderDataLimiteSell.Data.Id);
                             iQuantity += ordersList.Data?.Items?.Where(x => x.IsActive == true && x.Id == item.Key)?.FirstOrDefault()?.QuantityFilled ?? 0;
-                            orderDataLimiteSell = await kucoinClient2.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
+                            orderDataLimiteSell = await kucoinClient.SpotApi.Trading.PlaceOrderAsync(currentTrader.symbol,
                                                     Kucoin.Net.Enums.OrderSide.Sell, Kucoin.Net.Enums.NewOrderType.Limit,
                                                     quantity: iQuantity, price: item.Value);
                             placedOrdersList.Remove(item.Key);
@@ -198,7 +184,7 @@ namespace ConsoleTrader
             Console.WriteLine("Trade List Report: ");
             Console.WriteLine($"Trade Start: Buy Type Market Quantity: {quantity} ");
              
-            var _data = await kucoinClient2.SpotApi.CommonSpotClient.GetTickerAsync(currentTrader.symbol);
+            var _data = await kucoinClient.SpotApi.CommonSpotClient.GetTickerAsync(currentTrader.symbol);
             var price = _data.Data.LastPrice ?? 0;
             avgListTmp.Add(price);
 
@@ -252,7 +238,7 @@ namespace ConsoleTrader
         {
             if (trade is null) return;
             Console.Clear();
-            var _assets = await kucoinClient2.SpotApi.Account.GetAccountsAsync();
+            var _assets = await kucoinClient.SpotApi.Account.GetAccountsAsync();
             int ci = 1;
             foreach (var item in _assets.Data)
             {
@@ -269,12 +255,12 @@ namespace ConsoleTrader
             }
             var _selectedAssets = _assets.Data.ToArray()[key - 1];
             currentBalance = (_selectedAssets.Available * trade.balance) / 100;
-            var _tmp = await kucoinClient2.SpotApi.CommonSpotClient.GetSymbolsAsync();
+            var _tmp = await kucoinClient.SpotApi.ExchangeData.GetSymbolsAsync();
             var _tickers = _tmp.Data.Where(x => x.Name.EndsWith(_selectedAssets.Asset)).ToArray();
             ci = 1;
             foreach (var i in _tickers)
             {
-                Console.WriteLine($"{ci}. {i}");
+                Console.WriteLine($"{ci}. {i.Name}");
                 ci++;
             }
 
@@ -291,7 +277,7 @@ namespace ConsoleTrader
             Pair = _selectedTickers;
             trade.interval = trade.interval * 1000;
             string prompt = $"{DateTime.Now} \n";
-            WebCallResult<CryptoExchange.Net.CommonObjects.Ticker> xticker = await kucoinClient2.SpotApi.CommonSpotClient.GetTickerAsync(_selectedTickers);
+            WebCallResult<CryptoExchange.Net.CommonObjects.Ticker> xticker = await kucoinClient.SpotApi.CommonSpotClient.GetTickerAsync(_selectedTickers);
             decimal price = xticker.Data?.LastPrice ?? 0;
             Calculate = tradeCalc.Dequeue();
             tradeCalc.Enqueue(Calculate);
